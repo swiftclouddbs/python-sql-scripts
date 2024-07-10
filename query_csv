@@ -1,0 +1,19 @@
+import pandas as pd
+
+df = pd.read_csv("/Users/reginaldstuart/Documents/IT/llama3/table.csv")
+
+df['Event'].astype(str)
+df['Date'].astype(str)
+df['Details'].astype(str)
+
+while True:
+
+   holiday = input("Which holiday/event are you looking for? ")
+   result = df.loc[(df['Event'].str.contains(holiday, case=False)) | (df['Details'].str.contains(holiday, case=False))]
+   final = result[['Date', 'Event', 'Details']]
+
+   if(len(final) == 0):
+       print("Not found")
+
+   if holiday == 'stop' : break
+   print(final.to_string(index=False))
