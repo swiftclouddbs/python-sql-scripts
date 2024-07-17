@@ -1,19 +1,20 @@
 import pandas as pd
 
-df = pd.read_csv("/Users/reginaldstuart/Documents/IT/llama3/table.csv")
+df = pd.read_csv(".\Systems_Full_Inventory.csv")
 
-df['Event'].astype(str)
-df['Date'].astype(str)
-df['Details'].astype(str)
+df['SYSTEM'].astype('|S')
+df['APPLICATION'].astype('|S')
+df['PRIMARY TECHNICAL CONTACT'].astype('|S')
+df['ADDITIONAL CONTACTS'].astype('|S')
 
 while True:
 
-   holiday = input("Which holiday/event are you looking for? ")
-   result = df.loc[(df['Event'].str.contains(holiday, case=False)) | (df['Details'].str.contains(holiday, case=False))]
-   final = result[['Date', 'Event', 'Details']]
+    sys = input("Which system would you like POC info for? ")
+    result = df.loc[(df['SYSTEM'].str.contains(sys, case=False, na=False)|(df['INTERNAL IP'].str.contains(sys, case=False)) |(df['EXTERNAL IP'].str.contains(sys, case=False, na=False)))]
+    final = result[['APPLICATION', 'PRIMARY TECHNICAL CONTACT', 'ADDITIONAL CONTACTS']]
 
-   if(len(final) == 0):
-       print("Not found")
+    if(len(final) == 0):
+        print("Not found!")
 
-   if holiday == 'stop' : break
-   print(final.to_string(index=False))
+    if sys == 'stop' : break
+    print(final.to_string(index=False))
