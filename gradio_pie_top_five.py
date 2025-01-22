@@ -1,3 +1,6 @@
+#drag and drop program that creates a pie chart from the single column of data in the csv file.  
+#The pie chart will show the top five most frequent occurring values in the data set submitted. 
+
 import gradio as gr
 import pandas as pd
 import matplotlib.pyplot as plt
